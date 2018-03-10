@@ -14,10 +14,12 @@
                 <thead>
                     <tr>
                         <th class="active">id</th>
-                        <th class="active">Profissional</th>
-						<th class="active">Funcao</th>
-						<th class="active">Nivel</th>
-						<th class="active">Permissao</th>
+                        <th class="active">Nome do Usuário</th>
+						<th class="active">Sexo</th>
+						<th class="active">Funcao</th>						
+						<!--<th class="active">Nivel</th>
+						<th class="active">Permissao</th>-->
+						<th class="active">Data do Cadastro</th>
                     </tr>
                 </thead>
 
@@ -30,9 +32,11 @@
                         echo '<tr class="clickable-row" data-href="' . base_url() . 'funcionario/prontuario/' . $row['idSis_Usuario'] . '">';
                             echo '<td>' . $row['idSis_Usuario'] . '</td>';
                             echo '<td>' . $row['Nome'] . '</td>';
+							echo '<td>' . $row['Sexo'] . '</td>';
 							echo '<td>' . $row['Funcao'] . '</td>';
-							echo '<td>' . $row['Nivel'] . '</td>';
-							echo '<td>' . $row['Permissao'] . '</td>';
+							#echo '<td>' . $row['Nivel'] . '</td>';
+							#echo '<td>' . $row['Permissao'] . '</td>';
+							echo '<td>' . $row['DataCriacao'] . '</td>';
                         echo '</tr>';
                     }
                     ?>

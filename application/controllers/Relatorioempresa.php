@@ -98,8 +98,11 @@ class Relatorioempresa extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $data['query'] = quotes_to_entities($this->input->post(array(
-            'Nome',
+        $data['query'] = quotes_to_entities($this->input->post(array(         
+			'idSis_Usuario',
+			'Nome',
+			'Funcao',
+			'DataCriacao',			
             'Ordenamento',
             'Campo',
         ), TRUE));
@@ -109,7 +112,12 @@ class Relatorioempresa extends CI_Controller {
 
 
         $data['select']['Campo'] = array(
-            'F.Nome' => 'Nome do Usuário',
+            'F.idSis_Usuario' => 'id do Usuário',
+			'F.Nome' => 'Nome do Usuário',
+			'F.Sexo' => 'Sexo',
+			'F.Funcao' => 'Funcao',
+			'F.DataCriacao' => 'Data do Cadastro',
+			
         );
 
         $data['select']['Ordenamento'] = array(

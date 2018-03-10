@@ -3424,13 +3424,15 @@ exit();*/
 	public function list_funcionario($data, $completo) {
 
         $data['Nome'] = ($data['Nome']) ? ' AND F.idSis_Usuario = ' . $data['Nome'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'F.Nome' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'F.idSis_Usuario' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 
         $query = $this->db->query('
             SELECT
                 F.idSis_Usuario,
                 F.Nome,
+				F.DataCriacao,
+				F.Sexo,
 				FU.Funcao,
 				PE.Nivel,
 				PE.Permissao
@@ -3463,6 +3465,7 @@ exit();*/
 
             foreach ($query->result() as $row) {
 
+			$row->DataCriacao = $this->basico->mascara_data($row->DataCriacao, 'barras');
             }
 
             return $query;

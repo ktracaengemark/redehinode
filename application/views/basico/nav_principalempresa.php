@@ -21,14 +21,30 @@
 								<li><a href="<?php echo base_url() ?>acessoempresa/index"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['UsuarioEmpresaFilial']; ?></a></li>
 								<li role="separator" class="divider"></li>
 								<!--<li><a href="<?php echo base_url() ?>funcao/cadastrar"><span class="glyphicon glyphicon-pencil"></span> Cad Funçoes </a></li>
-								<li role="separator" class="divider"></li>-->
-								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Cad Usuários </a></li>
-								<li role="separator" class="divider"></li>
+								<li role="separator" class="divider"></li>-->					
 								<li><a href="<?php echo base_url() ?>relatorioempresa/empresafilial"><span class="glyphicon glyphicon-list"></span> Dados da Empresa </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="<?php echo base_url() ?>login/sair"><span class="glyphicon glyphicon-log-out"></span> Sair do Sistema </a></li>
 							</ul>
 						</div>						
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
+					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
+						<div class="btn-group">
+							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
+								<span class="glyphicon glyphicon-user"></span> Usuários <span class="caret"></span>
+							</button>
+							<ul class="dropdown-menu" role="menu">
+								
+								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Cadastro de Usuários </a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="<?php echo base_url() ?>login/index"><span class="glyphicon glyphicon-log-in"></span> Acesso dos Usuários</a></li>
+								
+							</ul>
+						</div>						
+						<div class="btn-group" role="group" aria-label="..."> </div>
+					</li>
+					<!--
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 
 						<div class="btn-group" role="group" aria-label="...">
@@ -41,7 +57,7 @@
 
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
-					<!--
+					
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">
@@ -52,9 +68,9 @@
 						</div>
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
-					-->
+					
 					<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
-						<!--
+						
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>relatorioempresa/sistemaempresa">	
 								<button type="button" class="btn btn-md active " id="countdowndiv">
@@ -62,7 +78,7 @@
 								</button>
 							</a>	
 						</div>
-						-->
+						
 						<div class="btn-group" role="group" aria-label="...">
 							<a href="<?php echo base_url(); ?>login/sair">
 								<button type="button" class="btn btn-md btn-danger ">
@@ -72,6 +88,7 @@
 						</div>
 						<div class="btn-group" role="group" aria-label="..."> </div>
 					</li>
+					-->
 				</ul>
 
 			</div>
