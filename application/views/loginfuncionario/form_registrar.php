@@ -110,6 +110,7 @@
 	<?php echo form_error('Permissao'); ?>
 	<br>	
 -->	
+<!--	
 	<label for="CpfUsuario">Cpf: (Digite apenas números)</label>
 	<input type="text" class="form-control Cpf" id="Cpf" maxlength="11"
 		   name="CpfUsuario" placeholder="99999999999" value="<?php echo $query['CpfUsuario']; ?>">
@@ -121,7 +122,8 @@
 		   name="RgUsuario" placeholder="999999999" value="<?php echo $query['RgUsuario']; ?>">
 	<?php echo form_error('RgUsuario'); ?>
 	<br>
-<!--	
+	
+	
 	<label for="OrgaoExpUsuario">OrgaoExp:</label>
 	<input type="text" class="form-control" id="OrgaoExpUsuario" maxlength="10"
 		   name="OrgaoExpUsuario" value="<?php echo $query['OrgaoExpUsuario']; ?>">

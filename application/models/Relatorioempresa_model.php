@@ -3433,6 +3433,8 @@ exit();*/
                 F.Nome,
 				F.DataCriacao,
 				F.Sexo,
+				F.CpfUsuario,
+				F.RgUsuario,				
 				FU.Funcao,
 				PE.Nivel,
 				PE.Permissao
