@@ -106,13 +106,13 @@ class Funcionario_model extends CI_Model {
 
         $query = $this->db->query('SELECT * '
                 . 'FROM Sis_Usuario WHERE '
-                . 'Funcionario = ' . $_SESSION['log']['id'] . ' AND '
+                #. 'Funcionario = ' . $_SESSION['log']['id'] . ' AND '
 				. 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(Nome like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
                 #. 'Nome like "%' . $data . '%" OR '
                 . 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
-                . 'Celular like "%' . $data . '%" OR Telefone2 like "%' . $data . '%" OR Telefone3 like "%' . $data . '%") '
+                . 'Celular like "%' . $data . '%") '
                 . 'ORDER BY Nome ASC ');
         /*
           echo $this->db->last_query();

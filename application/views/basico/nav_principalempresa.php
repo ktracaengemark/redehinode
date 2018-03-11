@@ -11,7 +11,20 @@
 			<div class="collapse navbar-collapse">
 
 				<ul class="nav navbar-nav navbar-center">
-
+					<!--
+					<li>
+						<?php echo form_open(base_url() . 'funcionario/pesquisar', 'class="navbar-form navbar-left"'); ?>
+						<div class="input-group">
+							<span class="input-group-btn">
+								<button class="btn btn-info" type="submit">
+									<span class="glyphicon glyphicon-search"></span>
+								</button>
+							</span>
+							<input type="text" placeholder="Pesquisar Usuários" class="form-control" name="Pesquisa" value="">
+						</div>
+						</form>
+					</li>
+					-->
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
