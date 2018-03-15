@@ -147,7 +147,7 @@ class Usuario_model extends CI_Model {
             FROM
                 Sis_Usuario					
             WHERE
-				idSis_EmpresaFilial = ' . $_SESSION['log']['idSis_EmpresaFilial'] . '
+				Empresa = ' . $_SESSION['log']['Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );
@@ -156,11 +156,11 @@ class Usuario_model extends CI_Model {
             $query = $this->db->query(
                 'SELECT                
 				idSis_Usuario,
-				Nome				
+				Nome
             FROM
                 Sis_Usuario					
             WHERE
-                idSis_EmpresaFilial = ' . $_SESSION['log']['idSis_EmpresaFilial'] . '
+                Empresa = ' . $_SESSION['log']['Empresa'] . '
 			ORDER BY 
 				Nome ASC'
     );

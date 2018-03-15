@@ -17,8 +17,9 @@ class Orcatrata2empresa extends CI_Controller {
         $this->load->driver('session');
 
         #load header view
-        $this->load->view('basico/header');
-        $this->load->view('basico/nav_principal');
+        $this->load->view('basico/headerempresa');
+        #$this->load->view('basico/nav_principal');
+		$this->load->view('basico/nav_principalempresa');
 
         #$this->load->view('orcatrata/nav_secundario');
     }
@@ -367,7 +368,7 @@ class Orcatrata2empresa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata2/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/orcamentoempresa/' . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/orcamentoempresa/' . $data['msg']);
                 exit();
             }
         }
@@ -593,7 +594,7 @@ class Orcatrata2empresa extends CI_Controller {
         $data['select']['Produto'] = $this->Basico_model->select_produtos();		
 
         $data['titulo'] = 'Editar Orçamento';
-        $data['form_open_path'] = 'orcatrata/alterar';
+        $data['form_open_path'] = 'orcatrata2empresa/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
@@ -634,7 +635,7 @@ class Orcatrata2empresa extends CI_Controller {
         $data['datepicker'] = 'DatePicker';
         $data['timepicker'] = 'TimePicker';
 
-        $data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
+        #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         /*
           echo '<br>';
@@ -646,7 +647,7 @@ class Orcatrata2empresa extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('orcatrata/form_orcatrata', $data);
+            $this->load->view('orcatrataempresa/form_orcatrata2empresa', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
@@ -692,7 +693,8 @@ class Orcatrata2empresa extends CI_Controller {
 
                     #$data['update']['servico']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['servico']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-                    $data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['servico']['inserir'][$j]['OrigemOrca'] = 'E/U';
+					$data['update']['servico']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['servico']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
 
                     $data['update']['servico']['inserir'][$j]['ValorVendaServico'] = str_replace(',', '.', str_replace('.', '', $data['update']['servico']['inserir'][$j]['ValorVendaServico']));
@@ -731,6 +733,7 @@ class Orcatrata2empresa extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     #$data['update']['produto']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['produto']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+					$data['update']['produto']['inserir'][$j]['OrigemOrca'] = 'E/U';
                     $data['update']['produto']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['produto']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
 					$data['update']['produto']['inserir'][$j]['DataValidadeProduto'] = $this->basico->mascara_data($data['update']['produto']['inserir'][$j]['DataValidadeProduto'], 'mysql');
@@ -772,7 +775,8 @@ class Orcatrata2empresa extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     #$data['update']['parcelasrec']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['parcelasrec']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-                    $data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['parcelasrec']['inserir'][$j]['OrigemOrca'] = 'E/U';
+					$data['update']['parcelasrec']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['parcelasrec']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
 
                     $data['update']['parcelasrec']['inserir'][$j]['ValorParcelaRecebiveis'] = str_replace(',', '.', str_replace('.', '', $data['update']['parcelasrec']['inserir'][$j]['ValorParcelaRecebiveis']));
@@ -817,7 +821,8 @@ class Orcatrata2empresa extends CI_Controller {
                 for($j=0;$j<$max;$j++) {
                     #$data['update']['procedimento']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
 					$data['update']['procedimento']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-                    $data['update']['procedimento']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+                    $data['update']['procedimento']['inserir'][$j]['OrigemOrca'] = 'E/U';
+					$data['update']['procedimento']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
                     $data['update']['procedimento']['inserir'][$j]['idApp_OrcaTrata'] = $data['orcatrata']['idApp_OrcaTrata'];
 
                     $data['update']['procedimento']['inserir'][$j]['DataProcedimento'] = $this->basico->mascara_data($data['update']['procedimento']['inserir'][$j]['DataProcedimento'], 'mysql');
@@ -857,7 +862,7 @@ class Orcatrata2empresa extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('orcatrata/form_orcatrata', $data);
+                $this->load->view('orcatrataempresa/form_orcatrata2empresa', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idApp_OrcaTrata'], FALSE);
@@ -865,7 +870,7 @@ class Orcatrata2empresa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'relatorio/orcamento/' . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/orcamentoempresa/' . $data['msg']);
                 
 				exit();
             }
@@ -907,7 +912,8 @@ class Orcatrata2empresa extends CI_Controller {
 
                 $data['msg'] = '?m=1';
 
-                redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+                #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
+				redirect(base_url() . 'orcatrata2empresa/listar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
                 exit();
             //}
         //}
@@ -943,7 +949,7 @@ class Orcatrata2empresa extends CI_Controller {
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         #$this->load->view('orcatrata/list_orcatrata', $data);
-		$this->load->view('relatorio/orcamento', $data);
+		$this->load->view('relatorioempresa/orcamentoempresa', $data);
         $this->load->view('basico/footer');
     }
 

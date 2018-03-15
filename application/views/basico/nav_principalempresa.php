@@ -28,7 +28,7 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Administrador <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> Funcionário <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<?php echo base_url() ?>acessoempresa/index"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['UsuarioEmpresaFilial']; ?></a></li>
@@ -48,6 +48,10 @@
 								<span class="glyphicon glyphicon-user"></span> Cadastros <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
+								<li><a href="<?php echo base_url() ?>orcatrata2empresa/cadastrar"><span class="glyphicon glyphicon-usd"></span> Cad.Orçam.</a></li>
+								<li role="separator" class="divider"></li>
+								<li><a href="<?php echo base_url() ?>relatorioempresa/orcamentoempresa"><span class="glyphicon glyphicon-list"></span> Rel.Orçam.</a></li>
+								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorioempresa/empresafilial"><span class="glyphicon glyphicon-user"></span> Funcionários </a></li>
 								<li role="separator" class="divider"></li>
 								<li><a href="<?php echo base_url() ?>relatorioempresa/funcionario"><span class="glyphicon glyphicon-user"></span> Consultores </a></li>

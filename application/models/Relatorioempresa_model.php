@@ -2458,7 +2458,7 @@ exit();*/
         }
     }
 
-    public function list_orcamento($data, $completo) {
+    public function list_orcamentoempresa($data, $completo) {
 
         if ($data['DataFim']) {
             $consulta =
@@ -2496,9 +2496,9 @@ exit();*/
                 '(OT.DataQuitado >= "' . $data['DataInicio4'] . '")';
         }
 
-        $data['NomeCliente'] = ($data['NomeCliente']) ? ' AND C.idApp_Cliente = ' . $data['NomeCliente'] : FALSE;
+        $data['Nome'] = ($data['Nome']) ? ' AND TSU.idSis_Usuario = ' . $data['Nome'] : FALSE;
 		$data['FormaPag'] = ($data['FormaPag']) ? ' AND TFP.idTab_FormaPag = ' . $data['FormaPag'] : FALSE;
-        $data['Campo'] = (!$data['Campo']) ? 'C.NomeCliente' : $data['Campo'];
+        $data['Campo'] = (!$data['Campo']) ? 'C.Nome' : $data['Campo'];
         $data['Ordenamento'] = (!$data['Ordenamento']) ? 'ASC' : $data['Ordenamento'];
 		$filtro1 = ($data['AprovadoOrca'] != '#') ? 'OT.AprovadoOrca = "' . $data['AprovadoOrca'] . '" AND ' : FALSE;
         $filtro2 = ($data['QuitadoOrca'] != '#') ? 'OT.QuitadoOrca = "' . $data['QuitadoOrca'] . '" AND ' : FALSE;
@@ -2506,7 +2506,7 @@ exit();*/
 
         $query = $this->db->query('
             SELECT
-                C.NomeCliente,
+                
                 OT.idApp_OrcaTrata,
                 OT.AprovadoOrca,
                 OT.DataOrca,
@@ -2523,16 +2523,16 @@ exit();*/
 				OT.TipoRD,
 				OT.FormaPagamento,
 				TFP.FormaPag,
-				TSU.Nome
+				TSU.Nome,
+				TSEF.idSis_EmpresaFilial
             FROM
-                App_Cliente AS C,
-                App_OrcaTrata AS OT
-				LEFT JOIN Sis_Usuario AS TSU ON TSU.idSis_Usuario = OT.idSis_Usuario
+                Sis_Usuario AS TSU,
+				App_OrcaTrata AS OT
+				LEFT JOIN Sis_EmpresaFilial AS TSEF ON TSEF.idSis_EmpresaFilial = OT.idSis_EmpresaFilial
 				LEFT JOIN Tab_FormaPag AS TFP ON TFP.idTab_FormaPag = OT.FormaPagamento
 
             WHERE
-				C.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				C.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TSEF.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
                 (' . $consulta . ') AND
 				(' . $consulta2 . ') AND
 				(' . $consulta3 . ') AND
@@ -2540,8 +2540,8 @@ exit();*/
                 ' . $filtro1 . '
                 ' . $filtro2 . '
 				' . $filtro3 . '
-                C.idApp_Cliente = OT.idApp_Cliente
-                ' . $data['NomeCliente'] . '
+                TSU.idSis_Usuario = OT.idSis_Usuario
+                ' . $data['Nome'] . '
 				' . $data['FormaPag'] . ' AND
 				OT.TipoRD = "R"
             ORDER BY
@@ -4723,14 +4723,14 @@ exit();*/
         $query = $this->db->query('
             SELECT
 				P.idSis_Usuario,
-				CONCAT(IFNULL(F.Abrev,""), " --- ", IFNULL(P.Nome,"")) AS NomeUsuario
+				CONCAT(IFNULL(P.Nome,"")) AS NomeUsuario
             FROM
                 Sis_Usuario AS P
 					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
             WHERE
                 P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 P.Empresa = ' . $_SESSION['log']['Empresa'] . '
-			ORDER BY F.Abrev ASC
+			ORDER BY P.Nome ASC
         ');
 
         $array = array();

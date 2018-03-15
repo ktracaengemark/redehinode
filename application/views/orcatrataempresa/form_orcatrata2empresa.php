@@ -26,13 +26,13 @@
 								<div class="panel-heading">
 									<div class="row">
 										<div class="col-md-4">
-											<label for="idApp_Cliente">Cliente *</label>
+											<label for="idSis_Usuario">Consultor *</label>
 											<select data-placeholder="Selecione uma opção..." class="form-control Chosen" <?php echo $readonly; ?>
-													id="idApp_Cliente" name="idApp_Cliente">
+													id="idSis_Usuario" name="idSis_Usuario">
 												<option value="">-- Sel. um Cliente --</option>
 												<?php
-												foreach ($select['idApp_Cliente'] as $key => $row) {
-													if ($orcatrata['idApp_Cliente'] == $key) {
+												foreach ($select['idSis_Usuario'] as $key => $row) {
+													if ($orcatrata['idSis_Usuario'] == $key) {
 														echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 													} else {
 														echo '<option value="' . $key . '">' . $row . '</option>';
