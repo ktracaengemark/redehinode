@@ -3489,7 +3489,7 @@ exit();*/
                 Sis_EmpresaFilial AS F
 
             WHERE
-				F.idSis_EmpresaFilial = ' . $_SESSION['log']['id'] . ' 
+				F.idSis_EmpresaMatriz = ' . $_SESSION['log']['idSis_EmpresaMatriz'] . ' 
                 ' . $data['Nome'] . '
             ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
