@@ -190,7 +190,7 @@
 										-->
 										<input type="hidden" name="PCount" id="PCount" value="<?php echo $count['PCount']; ?>"/>
 
-										<div class="input_fields_wrap2">
+										<div class="input_fields_wrap8">
 
 										<?php
 										for ($i=1; $i <= $count['PCount']; $i++) {
@@ -200,7 +200,7 @@
 										<input type="hidden" name="idApp_ProdutoVenda<?php echo $i ?>" value="<?php echo $produto[$i]['idApp_ProdutoVenda']; ?>"/>
 										<?php } ?>
 
-										<div class="form-group" id="2div<?php echo $i ?>">
+										<div class="form-group" id="8div<?php echo $i ?>">
 											<div class="panel panel-info">
 												<div class="panel-heading">
 													<div class="row">
@@ -269,7 +269,7 @@
 														</div>
 														<div class="col-md-1">
 															<label><br></label><br>
-															<button type="button" id="<?php echo $i ?>" class="remove_field2 btn btn-danger">
+															<button type="button" id="<?php echo $i ?>" class="remove_field8 btn btn-danger">
 																<span class="glyphicon glyphicon-trash"></span>
 															</button>
 														</div>
@@ -287,7 +287,7 @@
 										<div class="form-group">
 											<div class="row">
 												<div class="col-md-3">
-													<a class="add_field_button2 btn btn-warning">
+													<a class="add_field_button8 btn btn-warning">
 														<span class="glyphicon glyphicon-plus"></span> Adic. Produtos Ou Serviços
 													</a>
 												</div>
