@@ -3667,7 +3667,7 @@ exit();*/
 
     }
 
-	public function list_produtos($data, $completo) {
+	public function list_produtosempresa($data, $completo) {
 
 		$data['Produtos'] = ($data['Produtos']) ? ' AND TP.idTab_Produtos = ' . $data['Produtos'] : FALSE;
 		$data['Prodaux1'] = ($data['Prodaux1']) ? ' AND TP1.idTab_Prodaux1 = ' . $data['Prodaux1'] : FALSE;
@@ -3682,6 +3682,7 @@ exit();*/
 				TP.TipoProduto,
 				TP.CodProd,
 				TP.Produtos,
+				TP.OrigemOrca,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,
@@ -3708,6 +3709,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
                 TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				TP.OrigemOrca = "E/U" AND
 				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
 				' . $data['Produtos'] . '
 				' . $data['Prodaux1'] . '
@@ -4546,7 +4548,8 @@ exit();*/
 				TP3.Prodaux3,
 				TP1.Abrev1,
 				TP2.Abrev2,
-                OB.CodProd
+                OB.CodProd,
+				OB.OrigemOrca
             FROM
                 Tab_Produtos AS OB
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = OB.Prodaux1
@@ -4554,6 +4557,7 @@ exit();*/
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
             WHERE
                 OB.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				OB.OrigemOrca = "E/U" AND
 				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
             ORDER BY
                 OB.CodProd,

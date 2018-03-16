@@ -61,7 +61,9 @@
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<?php echo base_url() ?>orcatrata2empresa/cadastrar"><span class="glyphicon glyphicon-usd"></span> Cad.Orçam.</a></li>								
-								
+								<li role="separator" class="divider"></li>
+								<li><a href="<?php echo base_url() ?>relatorioempresa/produtosempresa"><span class="glyphicon glyphicon-pencil"></span> Produtos</a></li>
+									
 							</ul>
 						</div>
 						<div class="btn-group">

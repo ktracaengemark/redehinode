@@ -4,7 +4,7 @@
 
 defined('BASEPATH') OR exit('No direct script access allowed');
 
-class Produtos extends CI_Controller {
+class Produtosempresa extends CI_Controller {
 
     public function __construct() {
         parent::__construct();
@@ -13,12 +13,14 @@ class Produtos extends CI_Controller {
         $this->load->helper(array('form', 'url', 'date', 'string'));
       
         $this->load->library(array('basico', 'form_validation'));
-        $this->load->model(array('Basico_model', 'Produtos_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Convenio_model', 'Fornecedor_model', 'Formapag_model'));
+        $this->load->model(array('Basico_model', 'Produtosempresa_model', 'Prodaux1_model', 'Prodaux2_model', 'Prodaux3_model', 'Convenio_model', 'Fornecedor_model', 'Formapag_model'));
         $this->load->driver('session');
 
         
-        $this->load->view('basico/header');
-        $this->load->view('basico/nav_principal');
+        #$this->load->view('basico/header');
+        #$this->load->view('basico/nav_principal');
+        $this->load->view('basico/headerempresa');
+        $this->load->view('basico/nav_principalempresa');		
 
         
     }
@@ -32,10 +34,10 @@ class Produtos extends CI_Controller {
         else
             $data['msg'] = '';
 
-        $this->load->view('produtos/tela_index', $data);
+        $this->load->view('produtosempresa/tela_index', $data);
 
         #load footer view
-        $this->load->view('basico/footer');
+        $this->load->view('basico/footerempresa');
     }
 
     public function cadastrar() {
@@ -71,7 +73,7 @@ class Produtos extends CI_Controller {
 		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
 		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
 		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
-		(!$data['produtos']['OrigemOrca']) ? $data['produtos']['OrigemOrca'] = 'U/C' : FALSE;
+		(!$data['produtos']['OrigemOrca']) ? $data['produtos']['OrigemOrca'] = 'E/U' : FALSE;
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -107,8 +109,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 		
-        $data['titulo'] = 'Cadastar Produtos & Serviços do Consultor';
-        $data['form_open_path'] = 'produtos/cadastrar';
+        $data['titulo'] = 'Cadastar Produtos & Serviços da Empresa';
+        $data['form_open_path'] = 'produtosempresa/cadastrar';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
@@ -141,18 +143,19 @@ class Produtos extends CI_Controller {
         #run form validation
         if ($this->form_validation->run() === FALSE) {
             //if (1 == 1) {
-            $this->load->view('produtos/form_produtos', $data);
+            $this->load->view('produtosempresa/form_produtosempresa', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
 			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];            
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
-            $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
             $data['produtos']['OrigemOrca'] = $data['produtos']['OrigemOrca'];
-			$data['produtos']['idTab_Produtos'] = $this->Produtos_model->set_produtos($data['produtos']);
+			$data['produtos']['idTab_Produtos'] = $this->Produtosempresa_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);
             echo '<br>';
@@ -166,15 +169,16 @@ class Produtos extends CI_Controller {
             if (isset($data['valor'])) {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['valor'][$j]['OrigemOrca'] = 'U/C';
+                    #$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['valor'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+					$data['valor'][$j]['OrigemOrca'] = 'E/U';
 					$data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['valor'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
 					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
                     $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];					
 
                 }
-                $data['valor']['idTab_Valor'] = $this->Produtos_model->set_valor($data['valor']);
+                $data['valor']['idTab_Valor'] = $this->Produtosempresa_model->set_valor($data['valor']);
             }
 
 /*
@@ -198,12 +202,13 @@ class Produtos extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				#redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
                 exit();
             }
         }
 
-        $this->load->view('basico/footer');
+        $this->load->view('basico/footerempresa');
     }
 
     public function alterar($id = FALSE) {
@@ -256,7 +261,7 @@ class Produtos extends CI_Controller {
 
         if ($id) {
             #### Tab_Produtos ####
-            $data['produtos'] = $this->Produtos_model->get_produtos($id);
+            $data['produtos'] = $this->Produtosempresa_model->get_produtos($id);
            
             #### Carrega os dados do cliente nas variáves de sessão ####
             #$this->load->model('Cliente_model');
@@ -264,7 +269,7 @@ class Produtos extends CI_Controller {
             #$_SESSION['log']['idApp_Cliente'] = $_SESSION['Cliente']['idApp_Cliente'];
 
             #### Tab_Valor ####
-            $data['valor'] = $this->Produtos_model->get_valor($id);
+            $data['valor'] = $this->Produtosempresa_model->get_valor($id);
             if (count($data['valor']) > 0) {
                 $data['valor'] = array_combine(range(1, count($data['valor'])), array_values($data['valor']));
                 $data['count']['PTCount'] = count($data['valor']);
@@ -296,8 +301,8 @@ class Produtos extends CI_Controller {
 		$data['select']['Prodaux2'] = $this->Prodaux2_model->select_prodaux2();
 		$data['select']['Prodaux3'] = $this->Prodaux3_model->select_prodaux3();
 
-        $data['titulo'] = 'Editar Produtos & Serviços';
-        $data['form_open_path'] = 'produtos/alterar';
+        $data['titulo'] = 'Editar Produtos & Serviços da Empresa';
+        $data['form_open_path'] = 'produtosempresa/alterar';
         $data['readonly'] = '';
         $data['disabled'] = '';
         $data['panel'] = 'primary';
@@ -329,28 +334,29 @@ class Produtos extends CI_Controller {
 
         #run form validation
         if ($this->form_validation->run() === FALSE) {
-            $this->load->view('produtos/form_produtos', $data);
+            $this->load->view('produtosempresa/form_produtosempresa', $data);
         } else {
 
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
 			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];             
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
-            $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+            #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            $data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 
-            $data['update']['produtos']['anterior'] = $this->Produtos_model->get_produtos($data['produtos']['idTab_Produtos']);
+            $data['update']['produtos']['anterior'] = $this->Produtosempresa_model->get_produtos($data['produtos']['idTab_Produtos']);
             $data['update']['produtos']['campos'] = array_keys($data['produtos']);
             $data['update']['produtos']['auditoriaitem'] = $this->basico->set_log(
                 $data['update']['produtos']['anterior'],
                 $data['produtos'],
                 $data['update']['produtos']['campos'],
                 $data['produtos']['idTab_Produtos'], TRUE);
-            $data['update']['produtos']['bd'] = $this->Produtos_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
+            $data['update']['produtos']['bd'] = $this->Produtosempresa_model->update_produtos($data['produtos'], $data['produtos']['idTab_Produtos']);
 
             #### Tab_Valor ####
-            $data['update']['valor']['anterior'] = $this->Produtos_model->get_valor($data['produtos']['idTab_Produtos']);
+            $data['update']['valor']['anterior'] = $this->Produtosempresa_model->get_valor($data['produtos']['idTab_Produtos']);
             if (isset($data['valor']) || (!isset($data['valor']) && isset($data['update']['valor']['anterior']) ) ) {
 
                 if (isset($data['valor']))
@@ -363,8 +369,9 @@ class Produtos extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['update']['valor']['inserir'][$j]['OrigemOrca'] = 'U/C';
+                    #$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['update']['valor']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+					$data['update']['valor']['inserir'][$j]['OrigemOrca'] = 'E/U';
 					$data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 					$data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
@@ -378,13 +385,13 @@ class Produtos extends CI_Controller {
                 }
 
                 if (count($data['update']['valor']['inserir']))
-                    $data['update']['valor']['bd']['inserir'] = $this->Produtos_model->set_valor($data['update']['valor']['inserir']);
+                    $data['update']['valor']['bd']['inserir'] = $this->Produtosempresa_model->set_valor($data['update']['valor']['inserir']);
 
                 if (count($data['update']['valor']['alterar']))
-                    $data['update']['valor']['bd']['alterar'] =  $this->Produtos_model->update_valor($data['update']['valor']['alterar']);
+                    $data['update']['valor']['bd']['alterar'] =  $this->Produtosempresa_model->update_valor($data['update']['valor']['alterar']);
 
                 if (count($data['update']['valor']['excluir']))
-                    $data['update']['valor']['bd']['excluir'] = $this->Produtos_model->delete_valor($data['update']['valor']['excluir']);
+                    $data['update']['valor']['bd']['excluir'] = $this->Produtosempresa_model->delete_valor($data['update']['valor']['excluir']);
 
             }
 
@@ -404,7 +411,7 @@ class Produtos extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('produtos/form_produtos', $data);
+                $this->load->view('produtosempresa/form_produtosempresa', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
@@ -412,7 +419,7 @@ class Produtos extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
                 exit();
             }
         }
@@ -430,17 +437,17 @@ class Produtos extends CI_Controller {
         else
             $data['msg'] = '';
         
-                $this->Produtos_model->delete_produtos($id);
+                $this->Produtosempresa_model->delete_produtos($id);
 
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
                 exit();
             //}
         //}
 
-        $this->load->view('basico/footer');
+        $this->load->view('basico/footerempresa');
     }
 
     public function listar($id = NULL) {
@@ -455,8 +462,8 @@ class Produtos extends CI_Controller {
 
         //$_SESSION['Produtos'] = $this->Produtos_model->get_cliente($id, TRUE);
         //$_SESSION['Produtos']['idApp_Cliente'] = $id;
-        $data['aprovado'] = $this->Produtos_model->list_produtos($id, 'S', TRUE);
-        $data['naoaprovado'] = $this->Produtos_model->list_produtos($id, 'N', TRUE);
+        $data['aprovado'] = $this->Produtosempresa_model->list_produtos($id, 'S', TRUE);
+        $data['naoaprovado'] = $this->Produtosempresa_model->list_produtos($id, 'N', TRUE);
 
         //$data['aprovado'] = array();
         //$data['naoaprovado'] = array();
@@ -487,7 +494,7 @@ class Produtos extends CI_Controller {
 
         //$_SESSION['Produtos'] = $this->Produtos_model->get_cliente($id, TRUE);
         #$_SESSION['Produtos']['idApp_Cliente'] = $id;
-        $data['query'] = $this->Produtos_model->list_produtos(TRUE, TRUE);
+        $data['query'] = $this->Produtosempresa_model->list_produtos(TRUE, TRUE);
         /*
           echo "<pre>";
           print_r($data['query']);
