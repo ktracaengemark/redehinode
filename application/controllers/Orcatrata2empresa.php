@@ -913,7 +913,8 @@ class Orcatrata2empresa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente'] . $data['msg']);
-				redirect(base_url() . 'orcatrata2empresa/listar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+				#redirect(base_url() . 'orcatrata2empresa/listar/' . $_SESSION['Usuario']['idSis_Usuario'] . $data['msg']);
+				redirect(base_url() . 'relatorioempresa/orcamentoempresa/' . $data['msg']);
                 exit();
             //}
         //}
@@ -949,8 +950,9 @@ class Orcatrata2empresa extends CI_Controller {
         #$data['nav_secundario'] = $this->load->view('cliente/nav_secundario', $data, TRUE);
 
         #$this->load->view('orcatrata/list_orcatrata', $data);
-		$this->load->view('relatorioempresa/orcamentoempresa', $data);
-        $this->load->view('basico/footer');
+		redirect(base_url() . 'relatorioempresa/orcamentoempresa' . $data['msg']);
+        
+		$this->load->view('basico/footer');
     }
 
     public function listarBKP($id = NULL) {

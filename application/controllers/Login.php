@@ -115,6 +115,7 @@ class Login extends CI_Controller {
 				$_SESSION['log']['Empresa'] = $query['Empresa'];
 				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];
 				$_SESSION['log']['idSis_EmpresaFilial'] = $query['idSis_EmpresaFilial'];
+				$_SESSION['log']['Funcao'] = $query['Funcao'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 
                 $this->load->database();

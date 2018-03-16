@@ -28,7 +28,7 @@
 					<li class="btn-toolbar navbar-form navbar-left" role="toolbar" aria-label="...">
 						<div class="btn-group">
 							<button type="button" class="btn btn-primary  dropdown-toggle" data-toggle="dropdown">
-								<span class="glyphicon glyphicon-user"></span> Funcionário <span class="caret"></span>
+								<span class="glyphicon glyphicon-user"></span> Colaborador <span class="caret"></span>
 							</button>
 							<ul class="dropdown-menu" role="menu">
 								<li><a href="<?php echo base_url() ?>acessoempresa/index"><span class="glyphicon glyphicon-user"></span> <?php echo $_SESSION['log']['UsuarioEmpresaFilial']; ?></a></li>
