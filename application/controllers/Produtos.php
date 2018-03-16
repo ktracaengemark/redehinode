@@ -60,6 +60,7 @@ class Produtos extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
+			'OrigemOrca',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -70,6 +71,7 @@ class Produtos extends CI_Controller {
 		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
 		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
 		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
+		(!$data['produtos']['OrigemOrca']) ? $data['produtos']['OrigemOrca'] = 'U/C' : FALSE;
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -149,7 +151,8 @@ class Produtos extends CI_Controller {
             $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             $data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
-            $data['produtos']['idTab_Produtos'] = $this->Produtos_model->set_produtos($data['produtos']);
+            $data['produtos']['OrigemOrca'] = $data['produtos']['OrigemOrca'];
+			$data['produtos']['idTab_Produtos'] = $this->Produtos_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);
             echo '<br>';

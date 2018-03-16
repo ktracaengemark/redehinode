@@ -3653,6 +3653,7 @@ exit();*/
 				TP.TipoProduto,
 				TP.CodProd,
 				TP.Produtos,
+				TP.OrigemOrca,
 				TP1.Prodaux1,
 				TP2.Prodaux2,
 				TP3.Prodaux3,
@@ -3679,11 +3680,13 @@ exit();*/
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = TP.Prodaux3
             WHERE
                 TP.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				TP.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				TP.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
 				' . $data['Produtos'] . '
 				' . $data['Prodaux1'] . '
 				' . $data['Prodaux2'] . '
-				' . $data['Prodaux3'] . '
+				' . $data['Prodaux3'] . ' AND
+				TP.OrigemOrca = "U/C"
 			ORDER BY
                 ' . $data['Campo'] . ' ' . $data['Ordenamento'] . '
         ');
@@ -4505,7 +4508,9 @@ exit();*/
 					LEFT JOIN Tab_Prodaux3 AS TP3 ON TP3.idTab_Prodaux3 = OB.Prodaux3
             WHERE
                 OB.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . '
+				OB.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				OB.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+				OB.OrigemOrca = "U/C"
             ORDER BY
                 OB.CodProd,
 				TP3.Prodaux3,

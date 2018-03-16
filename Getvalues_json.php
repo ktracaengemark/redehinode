@@ -48,7 +48,8 @@ elseif ($_GET['q'] == 2) {
                 V.idTab_Valor,
                 CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
-				P.Categoria
+				P.Categoria,
+				P.OrigemOrca
             FROM
                 
                 Tab_Valor AS V
@@ -59,9 +60,22 @@ elseif ($_GET['q'] == 2) {
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
-				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				(P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
 				P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-                P.idTab_Produtos = V.idTab_Produtos
+				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
+                P.idTab_Produtos = V.idTab_Produtos AND
+				TCO.idTab_Convenio = "53" ) 
+				OR 
+				(P.OrigemOrca = "E/U" AND
+                P.idTab_Produtos = V.idTab_Produtos AND
+				TCO.idTab_Convenio = "53") 
+				OR
+				(P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				P.idSis_EmpresaFilial = ' . $_SESSION['log']['idSis_EmpresaFilial'] . ' AND
+				' . $_SESSION['log']['Funcao'] . ' = "2" AND
+                P.idTab_Produtos = V.idTab_Produtos AND
+				TCO.idTab_Convenio = "54")
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
