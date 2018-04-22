@@ -13,7 +13,11 @@
     </p>
     <!--<h2 class="form-signin-heading text-center">Agenda <?php echo ucfirst($nome_modulo) ?></h2><h4><b>***** versão alpha *****</b></h4>-->
     <h2 class="form-signin-heading text-center">Rede Calisi de Vendas</h2>	
-
+	<h3 class="form-signin-heading text-center">Olá!! Neste momento, estamos realizando atualizações no Sistema. <br> 
+												Ele Retornará ao ar dia 09/04/2018 às 00:00. </h3>
+	<h2 class="form-signin-heading text-center">Estamos muito felizes por termos você na nossa Rede.</h2>
+		
+	<!--
 	<label class="sr-only">Usuário</label>
     <input type="text" id="inputText" class="form-control" placeholder="Usuário ou E-mail" autofocus name="Usuario" value="<?php echo set_value('Usuario'); ?>">	   
 	<label class="sr-only">Senha</label>
@@ -25,6 +29,7 @@
 	<a class="btn btn-lg btn-warning btn-block" href="<?php echo base_url(); ?>loginfuncionario/registrar" role="button">Cadastrar Novo Consultor</a>
 	<br>
 	<a class="btn btn-lg btn-danger btn-block" href="<?php echo base_url(); ?>loginempresafilial/index" role="button">Acesso dos Colaboradores</a>	
+	-->
 	<!--<a class="btn btn btn-primary btn-danger btn-block" href="<?php echo base_url(); ?>loginempresafilial/registrar" role="button">Cadastrar Nova Empresa</a>	
 	<a class="btn btn btn-primary btn-danger" href="<?php echo base_url(); ?>login/registrar" role="button">Cadastrar Empresa</a>-->	
 	

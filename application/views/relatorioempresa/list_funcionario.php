@@ -19,8 +19,8 @@
 						<th class="active">Cpf</th>
 						<th class="active">Rg</th>
 						<th class="active">Funcao</th>						
-						<!--<th class="active">Nivel</th>
-						<th class="active">Permissao</th>-->
+						<th class="active">Nivel</th>
+						<!--<th class="active">Permissao</th>-->
 						<th class="active">Data do Cadastro</th>
                     </tr>
                 </thead>
@@ -38,7 +38,7 @@
 							echo '<td>' . $row['CpfUsuario'] . '</td>';
 							echo '<td>' . $row['RgUsuario'] . '</td>';
 							echo '<td>' . $row['Funcao'] . '</td>';
-							#echo '<td>' . $row['Nivel'] . '</td>';
+							echo '<td>' . $row['Nivel'] . '</td>';
 							#echo '<td>' . $row['Permissao'] . '</td>';
 							echo '<td>' . $row['DataCriacao'] . '</td>';
                         echo '</tr>';

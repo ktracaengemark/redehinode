@@ -48,8 +48,7 @@ elseif ($_GET['q'] == 2) {
                 V.idTab_Valor,
                 CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
-				P.Categoria,
-				P.OrigemOrca
+				P.Categoria
             FROM
                 
                 Tab_Valor AS V
@@ -60,14 +59,11 @@ elseif ($_GET['q'] == 2) {
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
-				((P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND
-                P.idTab_Produtos = V.idTab_Produtos AND
-				TCO.idTab_Convenio = "53" ) OR 
-				(P.OrigemOrca = "E/U" AND
-                P.idTab_Produtos = V.idTab_Produtos AND
-				TCO.idTab_Convenio = "53")) 
-
-			
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				(P.Empresa = ' . $_SESSION['log']['Empresa'] . ' OR 
+				P.ProdutoProprio = ' . $_SESSION['log']['id'] . ') AND
+				V.Convenio = "53" AND				
+                P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
@@ -91,15 +87,14 @@ elseif ($_GET['q'] == 2) {
 
 }
 
-elseif ($_GET['q'] == 5) {
+elseif ($_GET['q'] == 9) {
 
     $result = mysql_query(
             'SELECT
                 V.idTab_Valor,
                 CONCAT(IFNULL(P.CodProd,""), " -- ", IFNULL(TP3.Prodaux3,""), " -- ", IFNULL(P.Produtos,""), " -- ", IFNULL(TP1.Prodaux1,""), " -- ", IFNULL(TP2.Prodaux2,""), " -- ", IFNULL(TCO.Convenio,""), " -- ", IFNULL(V.Convdesc,""), " --- ", V.ValorVendaProduto, " -- ", IFNULL(P.UnidadeProduto,""), " -- ", IFNULL(TFO.NomeFornecedor,"")) AS NomeProduto,
                 V.ValorVendaProduto,
-				P.Categoria,
-				P.OrigemOrca
+				P.Categoria
             FROM
                 
                 Tab_Valor AS V
@@ -110,10 +105,11 @@ elseif ($_GET['q'] == 5) {
 					LEFT JOIN Tab_Prodaux2 AS TP2 ON TP2.idTab_Prodaux2 = P.Prodaux2
 					LEFT JOIN Tab_Prodaux1 AS TP1 ON TP1.idTab_Prodaux1 = P.Prodaux1
             WHERE
-				P.OrigemOrca = "E/U" AND
-                P.idTab_Produtos = V.idTab_Produtos AND
-				TCO.idTab_Convenio = "54" 
-			
+				P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				(P.Empresa = ' . $_SESSION['log']['Empresa'] . ' OR 
+				P.ProdutoProprio = "0") AND
+				V.Convenio = "54" AND				
+                P.idTab_Produtos = V.idTab_Produtos
 			ORDER BY
 				P.CodProd ASC,
 				P.Categoria ASC,
@@ -136,8 +132,7 @@ elseif ($_GET['q'] == 5) {
     }
 
 }
-
-elseif ($_GET['q'] == 3) {
+elseif ($_GET['q'] == 6) {
 
     $result = mysql_query(
             'SELECT
@@ -173,8 +168,15 @@ elseif ($_GET['q'] == 4) {
                 Tab_Convenio
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
-                Empresa = ' . $_SESSION['log']['Empresa'] . '
-                ORDER BY Convenio ASC'
+                Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				((3 = ' . $_SESSION['log']['Nivel'] . ' OR 
+				4 = ' . $_SESSION['log']['Nivel'] . ' ) AND
+				idTab_Convenio = "53") OR 
+				(6 = ' . $_SESSION['log']['Nivel'] . ' AND
+				(idTab_Convenio = "53" OR 
+				idTab_Convenio = "54"))
+				
+			ORDER BY Convenio ASC'
     );
 
     while ($row = mysql_fetch_assoc($result)) {
@@ -182,6 +184,32 @@ elseif ($_GET['q'] == 4) {
         $event_array[] = array(
             'id' => $row['idTab_Convenio'],
             'name' => utf8_encode($row['Convenio']),
+        );
+    }
+
+}
+
+elseif ($_GET['q'] == 3) {
+
+    $result = mysql_query(
+            'SELECT
+				P.idSis_Usuario,
+				CONCAT(P.Nome) AS Nome
+            FROM
+                Sis_Usuario AS P
+					LEFT JOIN Tab_Funcao AS F ON F.idTab_Funcao = P.Funcao
+            WHERE
+                P.idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
+				P.Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
+				P.idSis_Usuario = ' . $_SESSION['log']['id'] . ' 
+                ORDER BY P.Nome ASC'
+    );
+
+    while ($row = mysql_fetch_assoc($result)) {
+
+        $event_array[] = array(
+            'id' => $row['idSis_Usuario'],
+            'name' => utf8_encode($row['Nome']),
         );
     }
 

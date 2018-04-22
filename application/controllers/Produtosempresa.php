@@ -19,8 +19,8 @@ class Produtosempresa extends CI_Controller {
         
         #$this->load->view('basico/header');
         #$this->load->view('basico/nav_principal');
-        $this->load->view('basico/headerempresa');
-        $this->load->view('basico/nav_principalempresa');		
+        $this->load->view('basico/headerfuncionario');
+        $this->load->view('basico/nav_principalfuncionario');		
 
         
     }
@@ -62,7 +62,8 @@ class Produtosempresa extends CI_Controller {
 			'Prodaux1',
 			'Prodaux2',
 			'Prodaux3',
-			'OrigemOrca',
+			#'OrigemOrca',
+			'ProdutoProprio',
         ), TRUE));
 
         //Dá pra melhorar/encurtar esse trecho (que vai daqui até onde estiver
@@ -73,7 +74,9 @@ class Produtosempresa extends CI_Controller {
 		(!$data['produtos']['TipoProduto']) ? $data['produtos']['TipoProduto'] = 'V' : FALSE;
 		(!$data['produtos']['Categoria']) ? $data['produtos']['Categoria'] = 'P' : FALSE;
 		(!$data['produtos']['UnidadeProduto']) ? $data['produtos']['UnidadeProduto'] = 'UNID' : FALSE;
-		(!$data['produtos']['OrigemOrca']) ? $data['produtos']['OrigemOrca'] = 'E/U' : FALSE;
+		(!$data['produtos']['ProdutoProprio']) ? $data['produtos']['ProdutoProprio'] = '0' : FALSE;
+		#(!$data['produtos']['OrigemOrca']) ? $data['produtos']['OrigemOrca'] = 'E/U' : FALSE;
+		
 		
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
@@ -150,11 +153,12 @@ class Produtosempresa extends CI_Controller {
             #### Tab_Produtos ####
 
 			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];            
-            #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
-            $data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+            #$data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
-            $data['produtos']['OrigemOrca'] = $data['produtos']['OrigemOrca'];
+            #$data['produtos']['OrigemOrca'] = $data['produtos']['OrigemOrca'];
+			$data['produtos']['ProdutoProprio'] = $data['produtos']['ProdutoProprio'];
 			$data['produtos']['idTab_Produtos'] = $this->Produtosempresa_model->set_produtos($data['produtos']);
             /*
             echo count($data['servico']);
@@ -169,11 +173,12 @@ class Produtosempresa extends CI_Controller {
             if (isset($data['valor'])) {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
-                    #$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['valor'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-					$data['valor'][$j]['OrigemOrca'] = 'E/U';
-					$data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-					$data['valor'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['valor'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    #$data['valor'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+					$data['valor'][$j]['ProdutoProprio'] = '0';
+					#$data['valor'][$j]['OrigemOrca'] = 'E/U';
+					$data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
 					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
                     $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];					
 
@@ -194,7 +199,7 @@ class Produtosempresa extends CI_Controller {
                 $msg = "<strong>Erro no Banco de dados. Entre em contato com o administrador deste sistema.</strong>";
 
                 $this->basico->erro($msg);
-                $this->load->view('produtos/form_produtos', $data);
+                $this->load->view('produtosempresa/form_produtosempresa', $data);
             } else {
 
                 //$data['auditoriaitem'] = $this->basico->set_log($data['anterior'], $data['query'], $data['campos'], $data['idTab_Produtos'], FALSE);
@@ -203,7 +208,7 @@ class Produtosempresa extends CI_Controller {
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
 				#redirect(base_url() . 'relatorio/produtos/' . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
+				redirect(base_url() . 'relatoriofuncionario/produtosempresa/' . $data['msg']);
                 exit();
             }
         }
@@ -340,9 +345,9 @@ class Produtosempresa extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
-			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];             
+			#$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];             
             #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
-            $data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+            #$data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
 
@@ -369,11 +374,12 @@ class Produtosempresa extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    #$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
-                    $data['update']['valor']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-					$data['update']['valor']['inserir'][$j]['OrigemOrca'] = 'E/U';
-					$data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
-					$data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+                    $data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
+					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    #$data['update']['valor']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
+					$data['update']['valor']['inserir'][$j]['ProdutoProprio'] = '0';
+					#$data['update']['valor']['inserir'][$j]['OrigemOrca'] = 'E/U';
+					$data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
 					$data['update']['valor']['inserir'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorVendaProduto']));
 					
@@ -419,7 +425,7 @@ class Produtosempresa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
+				redirect(base_url() . 'relatoriofuncionario/produtosempresa/' . $data['msg']);
                 exit();
             }
         }
@@ -442,7 +448,7 @@ class Produtosempresa extends CI_Controller {
                 $data['msg'] = '?m=1';
 
                 #redirect(base_url() . 'produtos/listar/' . $data['msg']);
-				redirect(base_url() . 'relatorioempresa/produtosempresa/' . $data['msg']);
+				redirect(base_url() . 'relatoriofuncionario/produtosempresa/' . $data['msg']);
                 exit();
             //}
         //}
