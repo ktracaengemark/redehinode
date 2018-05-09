@@ -109,14 +109,14 @@ class Loginconsultor extends CI_Controller {
                 #$_SESSION['log']['Usuario'] = $query['Usuario'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
                 $_SESSION['log']['Usuario'] = (strlen($query['Usuario']) > 15) ? substr($query['Usuario'], 0, 15) : $query['Usuario'];
-                $_SESSION['log']['Nome'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
-				#$_SESSION['log']['Nome'] = $query['Nome'];
+                $_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
+				$_SESSION['log']['Nome'] = $query['Nome'];
 				$_SESSION['log']['id'] = $query['idSis_Usuario'];
 				$_SESSION['log']['idSis_EmpresaFilial'] = $query['idSis_EmpresaFilial'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['Empresa'] = $query['Empresa'];
-				$_SESSION['log']['NomeEmpresa'] = (strlen($query['NomeEmpresa']) > 18) ? substr($query['NomeEmpresa'], 0, 18) : $query['NomeEmpresa'];
-				#$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];				
+				$_SESSION['log']['NomeEmpresa2'] = (strlen($query['NomeEmpresa']) > 18) ? substr($query['NomeEmpresa'], 0, 18) : $query['NomeEmpresa'];
+				$_SESSION['log']['NomeEmpresa'] = $query['NomeEmpresa'];				
 				$_SESSION['log']['Nivel'] = $query['Nivel'];
 				$_SESSION['log']['Permissao'] = $query['Permissao'];
 				$_SESSION['log']['Funcao'] = $query['Funcao'];
@@ -225,23 +225,24 @@ class Loginconsultor extends CI_Controller {
             $this->load->view('loginconsultor/form_registrar', $data);
         } else {
 			
-			$data['query']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
-			$data['query']['idSis_EmpresaMatriz'] = $_SESSION['log']['Empresa'];
-			$data['query']['Empresa'] = $_SESSION['log']['Empresa'];
-			$data['query']['NomeEmpresa'] = $_SESSION['log']['NomeEmpresa'];
+			$data['query']['idSis_EmpresaFilial'] = 0;
+			$data['query']['idSis_EmpresaMatriz'] = 2;
+			$data['query']['Empresa'] = 2;
+			$data['query']['NomeEmpresa'] = "Rede Calisi de Vendas" ;
 			$data['query']['idTab_Modulo'] = 1;
-			$data['query']['QuemCad'] = $_SESSION['log']['id'];
+			$data['query']['QuemCad'] = 0;
 			$data['query']['Funcao'] = 1;
 			$data['query']['Nivel'] = 3;
-			$data['query']['Permissao'] = 3;						
+			$data['query']['Permissao'] = 3;
+			$data['query']['Associado'] = 1;
             $data['query']['Senha'] = md5($data['query']['Senha']);
 			$data['query']['DataNascimento'] = $this->basico->mascara_data($data['query']['DataNascimento'], 'mysql');
 			$data['query']['DataEmUsuario'] = $this->basico->mascara_data($data['query']['DataEmUsuario'], 'mysql');
             $data['query']['DataCriacao'] = $this->basico->mascara_data($data['query']['DataCriacao'], 'mysql');
 			$data['query']['Codigo'] = md5(uniqid(time() . rand()));
-            #$data['query']['Inativo'] = 1;
+            $data['query']['Inativo'] = 1;
             //ACESSO LIBERADO PRA QUEM REALIZAR O CADASTRO
-            $data['query']['Inativo'] = 0;
+            #$data['query']['Inativo'] = 0;
             unset($data['query']['Confirma']);
 
             $data['anterior'] = array();

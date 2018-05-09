@@ -87,7 +87,7 @@ class Relatoriofuncionario extends CI_Controller {
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
 
-            'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+            'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.DataOrca' => 'Data do Orçamento',
             'OT.ValorOrca' => 'Valor do Orçamento',
@@ -224,7 +224,7 @@ class Relatoriofuncionario extends CI_Controller {
 			'PR.DataPagoRecebiveis' => 'Data do Pagam.',
 			'PR.QuitadoRecebiveis' => 'Quit.Parc.',
 			'C.Nome' => 'Nome do Consultor',
-            'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+            'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.DataOrca' => 'Data do Orçamento',
             'OT.ValorOrca' => 'Valor do Orçamento',
@@ -1175,18 +1175,28 @@ class Relatoriofuncionario extends CI_Controller {
 			'AprovadoOrca',
 			'DataInicio',
             'DataFim',
+			'DataInicio2',
+            'DataFim2',
 			'Ordenamento',
             'Campo',
 
         ), TRUE));
-
+/*
         if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = '01/01/2017';
-
+	   
+		if (!$data['query']['DataInicio2'])
+           $data['query']['DataInicio2'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+		
+		if (!$data['query']['DataFim2'])
+           $data['query']['DataFim2'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-        $this->form_validation->set_rules('DataInicio', 'Data Início', 'required|trim|valid_date');
+        $this->form_validation->set_rules('DataInicio', 'Data Início', 'trim|valid_date');
         $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio2', 'Data Entrega Início', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim2', 'Data Entrega Fim', 'trim|valid_date');
 
 		$data['select']['AprovadoOrca'] = array(
             '#' => 'TODOS',
@@ -1196,9 +1206,8 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.Nome' => 'Nome do Consultor',
-			'OT.idApp_OrcaTrata' => 'Id Orçam.',
-			'OT.AprovadoOrca' => 'Orç. Aprov./Fechado?',
-            'OT.DataOrca' => 'Data do Orçam.',
+			'OT.idApp_OrcaTrataCons' => 'Id Orçam.',
+            'APV.DataValidadeProduto' => 'Data da Entrega.',			
 			'TPV.CodProd' => 'Código',
 			'TPV.Produtos' => 'Produto',
 			'TPV.Prodaux1' => 'Aux1',
@@ -1231,6 +1240,8 @@ class Relatoriofuncionario extends CI_Controller {
 			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
             $data['bd']['Campo'] = $data['query']['Campo'];
 			$data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
@@ -1274,32 +1285,35 @@ class Relatoriofuncionario extends CI_Controller {
 			'AprovadoOrca',
 			'DataInicio',
             'DataFim',
+			'DataInicio2',
+            'DataFim2',
 			'Ordenamento',
             'Campo',
 
         ), TRUE));
-
+/*
         if (!$data['query']['DataInicio'])
            $data['query']['DataInicio'] = '01/01/2017';
-
+		
+		if (!$data['query']['DataInicio2'])
+           $data['query']['DataInicio2'] = date("d/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+		
+		if (!$data['query']['DataFim2'])
+           $data['query']['DataFim2'] = date("t/m/Y", mktime(0,0,0,date('m'),'01',date('Y')));
+*/
         $this->form_validation->set_error_delimiters('<div class="alert alert-danger" role="alert">', '</div>');
         #$this->form_validation->set_rules('Pesquisa', 'Pesquisa', 'required|trim');
-        $this->form_validation->set_rules('DataInicio', 'Data Início', 'required|trim|valid_date');
-        $this->form_validation->set_rules('DataFim', 'Data Fim', 'trim|valid_date');
+        $this->form_validation->set_rules('DataInicio', 'Data Orç Início', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim', 'Data Orç Fim', 'trim|valid_date');
+		$this->form_validation->set_rules('DataInicio2', 'Data Dev. Início', 'trim|valid_date');
+        $this->form_validation->set_rules('DataFim2', 'Data Dev. Fim', 'trim|valid_date');
 
 
         $data['select']['Campo'] = array(
             'C.Nome' => 'Nome do Consultor',
-			'OT.idApp_OrcaTrata' => 'Nº Dev.',
-			'OT.Orcamento' => 'Nº Orç.',
-            'OT.DataOrca' => 'Dt. Dev.',
-			'OT.AprovadoDespesas' => 'Apr./Fech.',
-			'OT.CodProd' => 'Cd. Prod.',
-			'TPV.QtdVendaServico' => 'Qtd. do Produto',
-			'TPV.Produtos' => 'Produto',
-			'TPV.Prodaux1' => 'Aux1',
-			'TPV.Prodaux2' => 'Aux2',
-			'TPV.Prodaux3' => 'Categoria',
+			'OT.idApp_OrcaTrataCons' => 'NºOrç.',
+            'OT.DataOrca' => 'Dt.Orç.',
+			'APV.DataValidadeServico' => 'Dt.Dev.',
 
         );
 
@@ -1328,6 +1342,8 @@ class Relatoriofuncionario extends CI_Controller {
 			$data['bd']['Prodaux3'] = $data['query']['Prodaux3'];
 			$data['bd']['DataInicio'] = $this->basico->mascara_data($data['query']['DataInicio'], 'mysql');
             $data['bd']['DataFim'] = $this->basico->mascara_data($data['query']['DataFim'], 'mysql');
+			$data['bd']['DataInicio2'] = $this->basico->mascara_data($data['query']['DataInicio2'], 'mysql');
+            $data['bd']['DataFim2'] = $this->basico->mascara_data($data['query']['DataFim2'], 'mysql');
 			$data['bd']['AprovadoOrca'] = $data['query']['AprovadoOrca'];
 			$data['bd']['TipoDevolucao'] = $data['query']['TipoDevolucao'];
 			$data['bd']['Ordenamento'] = $data['query']['Ordenamento'];
@@ -1382,7 +1398,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
-			'OT.idApp_OrcaTrata' => 'Id Orçam.',
+			'OT.idApp_OrcaTrataCons' => 'Id Orçam.',
             'OT.DataOrca' => 'Data do Orçam.',
 			'OT.ProfissionalOrca' => 'Responsável',
 			'TPB.ServicoBase' => 'Serviço',
@@ -1459,7 +1475,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
-			'OT.idApp_OrcaTrata' => 'Id Orçam.',
+			'OT.idApp_OrcaTrataCons' => 'Id Orçam.',
             'OT.DataOrca' => 'Data do Orçam.',
 			'OT.ProfissionalOrca' => 'Responsável',
 			'PD.NomeServico' => 'Serviço',
@@ -1708,7 +1724,7 @@ class Relatoriofuncionario extends CI_Controller {
 		$data['select']['Campo'] = array(
 			'C.NomeCliente' => 'Cliente',
 			'TCO.idApp_Despesas' => 'Nº da Devol.',
-			'TCO.idApp_OrcaTrata' => 'Nº do Orçam.',
+			'TCO.idApp_OrcaTrataCons' => 'Nº do Orçam.',
             'TCO.DataDespesas' => 'Data da Devol.',
 			'TCO.AprovadoDespesas' => 'Devol. Aprov./Fechado?',
 			'TCO.CodProd' => 'Código',
@@ -1838,13 +1854,13 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.Nome' => 'Nome do Cliente',
-            'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+            'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
             'OT.AprovadoOrca' => 'Orçamento Aprovado?',
             'OT.DataOrca' => 'Data do Orçamento',
 			'OT.DataEntradaOrca' => 'Validade do Orçamento',
 			'OT.DataPrazo' => 'Data da Entrega',
             'OT.ValorOrca' => 'Valor do Orçamento',
-			'OT.ValorEntradaOrca' => 'Valor do Desconto',
+			'OT.ValorDev' => 'Valor do Desconto',
 			'OT.ValorRestanteOrca' => 'Valor a Receber',
 			'OT.FormaPag' => 'Forma de Pag.?',
             'OT.ServicoConcluido' => 'Serviço Concluído?',
@@ -1973,7 +1989,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.Nome' => 'Nome do Consultor',
-            'OT.idApp_OrcaTrata' => 'Nº Devol.',
+            'OT.idApp_OrcaTrataCons' => 'Nº Devol.',
             'OT.AprovadoOrca' => 'Aprovado.',
             'OT.DataOrca' => 'Dt. Devol.',
 			'OT.TipoDevolucao' => 'Tipo Devol.',
@@ -2054,7 +2070,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idApp_Despesas',
-			'idApp_OrcaTrata',
+			'idApp_OrcaTrataCons',
 			'NomeCliente',
             'DataFim',
 			'DataInicio',
@@ -2105,7 +2121,7 @@ class Relatoriofuncionario extends CI_Controller {
 
 			'C.NomeCliente' => 'Cliente',
             'OT.idApp_Despesas' => 'Número da Devolução',
-			'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+			'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
             'OT.AprovadoDespesas' => 'Orçamento Aprovado?',
             'OT.DataDespesas' => 'Data do Orçamento',
 			'OT.DataEntradaDespesas' => 'Validade do Orçamento',
@@ -2182,7 +2198,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['query'] = quotes_to_entities($this->input->post(array(
 			'idApp_Despesas',
-			'idApp_OrcaTrata',
+			'idApp_OrcaTrataCons',
 			'Categoriadesp',
 			'TipoDespesa',
 			'NomeCliente',
@@ -2496,7 +2512,7 @@ class Relatoriofuncionario extends CI_Controller {
         );
 
         $data['select']['Nome'] = $this->Relatoriofuncionario_model->select_consultores();
-		#$data['select']['Inativo'] = $this->Relatoriofuncionario_model->select_inativo();
+		$data['select']['Inativo'] = $this->Relatoriofuncionario_model->select_inativo();
 
         $data['titulo'] = 'Relatório de Consultores';
 
@@ -3185,7 +3201,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
-			'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+			'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
 			'OT.DataOrca' => 'Data do Orçamento',
             'OT.DataPrazo' => 'Data Prazo',
 			'OT.AprovadoOrca' => 'Orçamento Aprovado?',
@@ -3401,7 +3417,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
 			'C.NomeCliente' => 'Nome do Cliente',
-			'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+			'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
 			'OT.AprovadoOrca' => 'Aprovado?',
 			'PD.QtdVendaProduto' => 'Qtd. do Produto',
 			'PD.idTab_Produto' => 'Produto',
@@ -3498,7 +3514,7 @@ class Relatoriofuncionario extends CI_Controller {
 
         $data['select']['Campo'] = array(
             'C.NomeCliente' => 'Nome do Cliente',
-			'OT.idApp_OrcaTrata' => 'Número do Orçamento',
+			'OT.idApp_OrcaTrataCons' => 'Número do Orçamento',
 			'OT.DataOrca' => 'Data do Orçamento',
             'OT.DataPrazo' => 'Data Prazo',
 			'OT.AprovadoOrca' => 'Orçamento Aprovado?',

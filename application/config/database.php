@@ -112,9 +112,7 @@ $db['default'] = array(
 */
     #'database' => 'ci',
     #'database' => 'app',
-	#'database' => 'app.redes',
-	#'database' => 'app.calisi',
-	'database' => 'app.calisi.testes',
+	'database' => 'app.calisi',
 	'dbdriver' => 'mysqli',
 	'dbprefix' => '',
 	'pconnect' => TRUE,
