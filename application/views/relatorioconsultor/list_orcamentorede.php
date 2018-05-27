@@ -81,7 +81,7 @@
 							echo '<td>' . $row['FormaPag'] . '</td>';							
                             #echo '</div>';
                             echo '<td class="notclickable">
-                                    <a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrintcons/imprimir/' . $row['idApp_OrcaTrata'] . '">
+                                    <a class="btn btn-md btn-info notclickable" target="_blank" href="' . base_url() . 'OrcatrataPrint/imprimir/' . $row['idApp_OrcaTrata'] . '">
                                         <span class="glyphicon glyphicon-print notclickable"></span>
                                     </a>
                                 </td>';

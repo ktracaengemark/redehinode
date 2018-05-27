@@ -22,7 +22,7 @@
 						<th class="active">Aux1</th>
 						<th class="active">Aux2</th>
 						<th class="active">Valor</th>
-						<th class="active">Dt Ent.</th>
+
 						<th class="active">Obs</th>
                     </tr>
                 </thead>
@@ -32,9 +32,9 @@
                     foreach ($report->result_array() as $row) {
 
                         #echo '<tr>';
-                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatrata/alterar/' . $row['idApp_OrcaTrata'] . '">';
-							echo '<td>' . $row['idApp_OrcaTrata'] . '</td>';
-							echo '<td>' . $row['Nome'] . '</td>';							
+                        echo '<tr class="clickable-row" data-href="' . base_url() . 'orcatratacons/alterar/' . $row['idApp_OrcaTrataCons'] . '">';
+							echo '<td>' . $row['idApp_OrcaTrataCons'] . '</td>';
+							echo '<td>' . $row['NomeCliente'] . '</td>';							
                             echo '<td>' . $row['DataOrca'] . '</td>';
 							echo '<td>' . $row['CodProd'] . '</td>';
 							echo '<td>' . $row['QtdVendaProduto'] . '</td>';
@@ -43,7 +43,7 @@
 							echo '<td>' . $row['Prodaux1'] . '</td>';
 							echo '<td>' . $row['Prodaux2'] . '</td>';
 							echo '<td>' . $row['ValorVendaProduto'] . '</td>';
-							echo '<td>' . $row['DataValidadeProduto'] . '</td>';
+
 							echo '<td>' . $row['ObsProduto'] . '</td>';	
                         echo '</tr>';
                     }

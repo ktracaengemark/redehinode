@@ -7,13 +7,13 @@
 		<div class="col-md-12">
 
 			<div class="panel-heading text-center">
-				<h3><?php echo '<strong>' . $_SESSION['Cliente']['idSis_Usuario'] . '</strong> - <strong>ORÇAMENTO</strong> - <strong>Nº: ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?></h3>
+				<h3><?php echo '<strong>' . $_SESSION['Consultor']['NomeEmpresa'] . '</strong> - <strong>ORÇAMENTO</strong> - <strong>Nº: ' . $_SESSION['Orcatrata']['idApp_OrcaTrata'] . '</strong>' ?></h3>
 			</div>
 
 			<div class="panel-body">
 
 				<hr />
-				<?php echo '<h4>Cliente: ' . $_SESSION['Cliente']['NomeCliente'] . ' - Id: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</h4>' ?>
+				<?php echo '<h4>Consultor(a): ' . $_SESSION['Consultor']['NomeConsultor'] . ' - Id: ' . $_SESSION['Consultor']['idApp_Consultor'] . '</h4>' ?>
 				<hr />
 
 				<h3 class="text-center">Produtos Entregues </h3>
@@ -143,20 +143,18 @@
 						<tr>
 							<th class="col-md-4" scope="col">Orçamento</th>
 							<th class="col-md-4" scope="col">Devolução</th>
-							<!--<th class="col-md-3" scope="col">Desconto</th>-->
-							<th class="col-md-4" scope="col">Resta Pagar</th>
+							<th class="col-md-4" scope="col">Valor</th>
 						</tr>
 					</thead>
 					<tbody>
 						<tr>
 							<td><?php echo number_format($orcatrata['ValorOrca'], 2, ',', '.') ?></td>
 							<td><?php echo number_format($orcatrata['ValorDev'], 2, ',', '.') ?></td>
-							<!--<td><?php echo number_format($orcatrata['ValorEntradaOrca'], 2, ',', '.') ?></td>-->
 							<td><?php echo number_format($orcatrata['ValorRestanteOrca'], 2, ',', '.') ?></td>
 						</tr>
 					</tbody>
 				</table>
-				
+
 				<table class="table table-bordered">
 					<thead>
 						<tr>
@@ -192,7 +190,7 @@
 					<tbody>
 
 						<?php
-						for ($i=1; $i <= $orcatrata['QtdParcelasOrca']; $i++) {
+						for ($i=1; $i <= $count['PRCount']; $i++) {
 							#echo $produto[$i]['QtdVendaProduto'];
 						?>
 

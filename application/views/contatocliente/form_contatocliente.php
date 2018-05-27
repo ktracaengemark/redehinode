@@ -7,10 +7,10 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 		
-			<div class="panel panel-primary">
+
 				
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Cliente']['Nome'] . '</strong> - <small>Id.: ' . $_SESSION['Cliente']['idSis_Usuario'] . '</small>' ?></strong></div>
-				<div class="panel-body">
+
+
 			
 					<nav class="navbar navbar-inverse">
 					  <div class="container-fluid">
@@ -20,133 +20,35 @@
 							<span class="icon-bar"></span>
 							<span class="icon-bar"></span> 
 						  </button>
-						  <a class="navbar-brand" href="#">Menu </a>
+						  <a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?>
+						  </a>
 						</div>
 						<div class="collapse navbar-collapse" id="myNavbar">
+
 							<ul class="nav navbar-nav navbar-center">
-						
-								<li class="btn-toolbar navbar-form" role="toolbar" aria-label="...">
+								<li>
+									<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Cliente
+									</a>
+								</li>
 
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-user"></span> Cliente <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-													<a href="<?php echo base_url() . 'clienteusuario/prontuario/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-														<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/clienteusuario\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-												<a href="<?php echo base_url() . 'clienteusuario/alterar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Edit.
-												</a>
-											</a>
-											</li>
-										</ul>
-									</div>
-									<div class="btn-group">
-										<button type="button" class="btn btn-sm btn-default  dropdown-toggle" data-toggle="dropdown">
-											<span class="glyphicon glyphicon-usd"></span> Orçamentos <span class="caret"></span>
-										</button>
-										<ul class="dropdown-menu" role="menu">
-											<li>
-												<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-													<a href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-														<span class="glyphicon glyphicon-usd"></span> List.
-													</a>
-												</a>
-											</li>
-											<li role="separator" class="divider"></li>
-											<li>
-												<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-													<a href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-														<span class="glyphicon glyphicon-plus"></span> Cad.
-													</a>
-												</a>
-											</li>
-										</ul>
-									</div>
+								<li>
+									<a href="<?php echo base_url() . 'orcatratacons/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-usd"></span> Ver Orçams.
+									</a>
+								</li>
 
-									<div class="btn-group" role="group" aria-label="..."> </div>
+								<li>
+									<a href="<?php echo base_url() . 'orcatratacons/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-plus"></span> Cad. Orçam.
+									</a>
 								</li>
 							</ul>
-							<!--
-							<ul class="nav navbar-nav navbar-right">
-								<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
-								<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
-							</ul>
-							-->
+
 						</div>
 					  </div>
 					</nav>
-					<!--				
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 "></div>
-							<div class="col-md-8 col-lg-10">
-								<div class="col-md-3 text-left">
-									<label for="">Cliente:</label>
-									<div class="form-group">
-										<div class="row">
-											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'clienteusuario/prontuario/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-												</a>
-											</a>
-											<a <?php if (preg_match("/clienteusuario\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'clienteusuario/alterar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Edit.
-												</a>
-											</a>
-										</div>
-									</div>									
-								</div>
-								
-								<div class="col-md-3 text-left">
-									<label for="">Agendamentos:</label>
-									<div class="form-group">
-										<div class="row">
-											<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-calendar"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/consulta\/(cadastrar|alterar)\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'consulta/cadastrar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>	
-									</div>	
-								</div>
-								
-								<div class="col-md-3 text-left">
-									<label for="">Orçamentos:</label>
-									<div class="form-group ">
-										<div class="row">
-											<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-usd"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idSis_Usuario']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>		
-									</div>	
-								</div>
-							</div>
-							<div class="col-md-2"></div>
-						</div>
-					</div>
-					-->
 
 					<?php } ?>
 
@@ -165,14 +67,14 @@
 									<div class="form-group">
 										<div class="row">
 											<div class="col-md-4">
-												<label for="NomeContatoUsuario">Nome do ContatoUsuario: *</label>
-												<input type="text" class="form-control" id="NomeContatoUsuario" maxlength="255" <?php echo $readonly; ?>
-													   name="NomeContatoUsuario" autofocus value="<?php echo $query['NomeContatoUsuario']; ?>">
+												<label for="NomeContatoCliente">Nome do ContatoCliente: *</label>
+												<input type="text" class="form-control" id="NomeContatoCliente" maxlength="255" <?php echo $readonly; ?>
+													   name="NomeContatoCliente" autofocus value="<?php echo $query['NomeContatoCliente']; ?>">
 											</div>
 											<div class="col-md-4">
-												<label for="TelefoneContatoUsuario">Telefone Principal: *</label>
-												<input type="text" class="form-control Celular CelularVariavel" id="TelefoneContatoUsuario" maxlength="14" <?php echo $readonly; ?>
-													   name="TelefoneContatoUsuario" placeholder="(XX)999999999" value="<?php echo $query['TelefoneContatoUsuario']; ?>">
+												<label for="TelefoneContatoCliente">Telefone Principal: *</label>
+												<input type="text" class="form-control Celular CelularVariavel" id="TelefoneContatoCliente" maxlength="14" <?php echo $readonly; ?>
+													   name="TelefoneContatoCliente" placeholder="(XX)999999999" value="<?php echo $query['TelefoneContatoCliente']; ?>">
 											</div>
 											<div class="col-md-4">
 												<label for="DataNascimento">Data de Nascimento:</label>
@@ -288,7 +190,7 @@
 									
 									<div class="form-group">
 										<div class="row">
-											<input type="hidden" name="idSis_Usuario" value="<?php echo $_SESSION['Cliente']['idSis_Usuario']; ?>"> 
+											<input type="hidden" name="idApp_Cliente" value="<?php echo $_SESSION['Cliente']['idApp_Cliente']; ?>"> 
 											<?php if ($metodo == 2) { ?>
 
 												<div class="col-md-6">
@@ -320,7 +222,7 @@
 																	</button>
 																</div>
 																<div class="col-md-6 text-right">
-																	<a class="btn btn-danger" href="<?php echo base_url() . 'contatocliente/excluir/' . $query['idApp_ContatoUsuario'] ?>" role="button">
+																	<a class="btn btn-danger" href="<?php echo base_url() . 'contatocliente/excluir/' . $query['idApp_ContatoCliente'] ?>" role="button">
 																		<span class="glyphicon glyphicon-trash"></span> Confirmar Exclusão
 																	</a>
 																</div>
@@ -343,8 +245,8 @@
 							</div>
 						</div>
 					</div>
-				</div>	
-			</div>		
+
+	
 		</div>
 		<div class="col-md-2"></div>
 	</div>	

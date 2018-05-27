@@ -79,9 +79,9 @@ class Produtosconsultor extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
+            if ($this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
 
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                #$data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorVendaProduto'] = $this->input->post('ValorVendaProduto' . $i);
 
@@ -150,8 +150,9 @@ class Produtosconsultor extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
-			$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];            
-            $data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['produtos']['Empresa'] = $_SESSION['log']['id'];            
+            #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
+			$data['produtos']['idApp_Consultor'] = $_SESSION['log']['id'];
             #$data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
 			#$data['produtos']['ValorCompraProduto'] = str_replace(',', '.', str_replace('.', '', $data['produtos']['ValorCompraProduto']));
@@ -171,13 +172,15 @@ class Produtosconsultor extends CI_Controller {
             if (isset($data['valor'])) {
                 $max = count($data['valor']);
                 for($j=1;$j<=$max;$j++) {
-                    $data['valor'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
-					$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['valor'][$j]['Empresa'] = $_SESSION['log']['id'];
+					#$data['valor'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['valor'][$j]['idApp_Consultor'] = $_SESSION['log']['id'];
                     #$data['valor'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 					$data['valor'][$j]['ProdutoProprio'] = $_SESSION['log']['id'];
 					$data['valor'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
 					$data['valor'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['valor'][$j]['ValorVendaProduto']));
-                    $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];					
+                    $data['valor'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
+					$data['valor'][$j]['Convenio'] = 53;
 
                 }
                 $data['valor']['idTab_Valor'] = $this->Produtosconsultor_model->set_valor($data['valor']);
@@ -249,9 +252,9 @@ class Produtosconsultor extends CI_Controller {
         $j = 1;
         for ($i = 1; $i <= $data['count']['PTCount']; $i++) {
 
-            if ($this->input->post('Convenio' . $i) || $this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
+            if ($this->input->post('Convdesc' . $i) || $this->input->post('ValorVendaProduto' . $i)) {
                 $data['valor'][$j]['idTab_Valor'] = $this->input->post('idTab_Valor' . $i);
-                $data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
+                #$data['valor'][$j]['Convenio'] = $this->input->post('Convenio' . $i);
 				$data['valor'][$j]['Convdesc'] = $this->input->post('Convdesc' . $i);
                 $data['valor'][$j]['ValorVendaProduto'] = $this->input->post('ValorVendaProduto' . $i);
 
@@ -344,7 +347,7 @@ class Produtosconsultor extends CI_Controller {
             ////////////////////////////////Preparar Dados para Inserção Ex. Datas "mysql" //////////////////////////////////////////////
             #### Tab_Produtos ####
 
-			#$data['produtos']['Empresa'] = $_SESSION['log']['Empresa'];             
+			#$data['produtos']['Empresa'] = $_SESSION['log']['id'];            
             #$data['produtos']['idSis_Usuario'] = $_SESSION['log']['id'];
             #$data['produtos']['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 			$data['produtos']['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
@@ -373,11 +376,13 @@ class Produtosconsultor extends CI_Controller {
 
                 $max = count($data['update']['valor']['inserir']);
                 for($j=0;$j<$max;$j++) {
-                    $data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['Empresa'];
-					$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+                    $data['update']['valor']['inserir'][$j]['Empresa'] = $_SESSION['log']['id'];
+					#$data['update']['valor']['inserir'][$j]['idSis_Usuario'] = $_SESSION['log']['id'];
+					$data['update']['valor']['inserir'][$j]['idApp_Consultor'] = $_SESSION['log']['id'];					
                     #$data['update']['valor']['inserir'][$j]['idSis_EmpresaFilial'] = $_SESSION['log']['idSis_EmpresaFilial'];
 					$data['update']['valor']['inserir'][$j]['ProdutoProprio'] = $_SESSION['log']['id'];
-					$data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];					
+					$data['update']['valor']['inserir'][$j]['idTab_Modulo'] = $_SESSION['log']['idTab_Modulo'];
+					$data['update']['valor']['inserir'][$j]['Convenio'] = 53;
                     $data['update']['valor']['inserir'][$j]['idTab_Produtos'] = $data['produtos']['idTab_Produtos'];
 					$data['update']['valor']['inserir'][$j]['ValorVendaProduto'] = str_replace(',', '.', str_replace('.', '', $data['update']['valor']['inserir'][$j]['ValorVendaProduto']));
 					

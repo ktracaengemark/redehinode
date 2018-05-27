@@ -29,14 +29,29 @@ class Cliente_model extends CI_Model {
         }
     }
 
-    public function get_cliente($data) {
+    public function get_cliente1($data) {
         $query = $this->db->query('SELECT * FROM App_Cliente WHERE idApp_Cliente = ' . $data);
 
         $query = $query->result_array();
 
         return $query[0];
     }
+	
+	public function get_cliente($data) {
+        $query = $this->db->query('
+		SELECT *
 
+		FROM 
+			App_Cliente AS C 
+				LEFT JOIN App_Consultor AS CO ON CO.idApp_Consultor = C.idApp_Consultor
+		WHERE 
+			C.idApp_Cliente = ' . $data);
+
+        $query = $query->result_array();
+
+        return $query[0];
+    }
+	
     public function update_cliente($data, $id) {
 
         unset($data['Id']);
@@ -82,7 +97,7 @@ class Cliente_model extends CI_Model {
 
         */
 
-        $this->db->delete('App_Consulta', array('idApp_Cliente' => $data));
+        #$this->db->delete('App_Consulta', array('idApp_Cliente' => $data));
         $this->db->delete('App_ContatoCliente', array('idApp_Cliente' => $data));
 
         foreach ($query as $key) {
@@ -107,7 +122,7 @@ class Cliente_model extends CI_Model {
         $query = $this->db->query('SELECT * '
                 . 'FROM App_Cliente WHERE '
                 . 'Empresa = ' . $_SESSION['log']['Empresa'] . ' AND '
-				. 'idSis_Usuario = ' . $_SESSION['log']['id'] . ' AND '
+				. 'idApp_Consultor = ' . $_SESSION['log']['id'] . ' AND '
                 . 'idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND '
                 . '(NomeCliente like "%' . $data . '%" OR '
                 #. 'DataNascimento = "' . $this->basico->mascara_data($data, 'mysql') . '" OR '
@@ -149,7 +164,7 @@ class Cliente_model extends CI_Model {
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				idSis_Usuario = ' . $_SESSION['log']['id'] . '
+				idApp_Consultor = ' . $_SESSION['log']['id'] . '
 			ORDER BY 
 				NomeCliente ASC'
     );
@@ -164,7 +179,7 @@ class Cliente_model extends CI_Model {
             WHERE
                 idTab_Modulo = ' . $_SESSION['log']['idTab_Modulo'] . ' AND
                 Empresa = ' . $_SESSION['log']['Empresa'] . ' AND
-				idSis_Usuario = ' . $_SESSION['log']['id'] . '
+				idApp_Consultor = ' . $_SESSION['log']['id'] . '
 			ORDER BY 
 				NomeCliente ASC'
     );

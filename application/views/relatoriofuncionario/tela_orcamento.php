@@ -42,12 +42,12 @@
 										<div class="form-group text-left">
 											<div class="row">
 												<div class="col-md-6">
-													<label for="Ordenamento">Nome do Cliente:</label>
+													<label for="Ordenamento">Nome do Consultor:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" onchange="this.form.submit()"
-															id="Nome" name="Nome">
+															id="NomeConsultor" name="NomeConsultor">
 														<?php
-														foreach ($select['Nome'] as $key => $row) {
-															if ($query['Nome'] == $key) {
+														foreach ($select['NomeConsultor'] as $key => $row) {
+															if ($query['NomeConsultor'] == $key) {
 																echo '<option value="' . $key . '" selected="selected">' . $row . '</option>';
 															} else {
 																echo '<option value="' . $key . '">' . $row . '</option>';
@@ -61,7 +61,7 @@
 													<div class="form-group btn-block">
 														<div class="row">
 															<div class="col-md-8">
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen " onchange="this.form.submit()"
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen " 
 																		id="Campo" name="Campo">
 																	<?php
 																	foreach ($select['Campo'] as $key => $row) {
@@ -76,7 +76,7 @@
 															</div>
 
 															<div class="col-md-4">
-																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" onchange="this.form.submit()"
+																<select data-placeholder="Selecione uma opção..." class="form-control Chosen" 
 																		id="Ordenamento" name="Ordenamento">
 																	<?php
 																	foreach ($select['Ordenamento'] as $key => $row) {
@@ -94,7 +94,7 @@
 												</div>
 												<div class="col-md-3 text-left">
 													<label for="AprovadoOrca">Aprovado?</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
 															id="AprovadoOrca" name="AprovadoOrca">
 														<?php
 														foreach ($select['AprovadoOrca'] as $key => $row) {
@@ -109,7 +109,7 @@
 												</div>
 												<div class="col-md-3 text-left">
 													<label for="ServicoConcluido">Concluído?</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
 															id="ServicoConcluido" name="ServicoConcluido">
 														<?php
 														foreach ($select['ServicoConcluido'] as $key => $row) {
@@ -124,7 +124,7 @@
 												</div>
 												<div class="col-md-3 text-left">
 													<label for="QuitadoOrca">Quitado?</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
 															id="QuitadoOrca" name="QuitadoOrca">
 														<?php
 														foreach ($select['QuitadoOrca'] as $key => $row) {
@@ -139,7 +139,7 @@
 												</div>
 												<div class="col-md-3 text-left">
 													<label for="Ordenamento">Forma de Pag.</label>
-													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
+													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " 
 															id="FormaPag" name="FormaPag">
 														<?php
 														foreach ($select['FormaPag'] as $key => $row) {

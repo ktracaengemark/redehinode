@@ -22,7 +22,7 @@
 							<button  class="btn btn-sm btn-success" type="button" data-toggle="modal" data-loading-text="Aguarde..." data-target=".bs-excluir-modal2-sm">
 								<span class="glyphicon glyphicon-filter"></span> Filtros
 							</button>											
-							<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>relatorioconsultor/clientesusuario" role="button"> 
+							<a class="btn btn-sm btn-danger" href="<?php echo base_url() ?>orcatratacons/cadastrar2" role="button"> 
 								<span class="glyphicon glyphicon-plus"></span> Novo Orç.
 							</a>
 						</div>
@@ -41,6 +41,7 @@
 									<div class="modal-footer">
 										<div class="form-group text-left">
 											<div class="row">
+												<!--
 												<div class="col-md-9  text-left">
 													<label for="Ordenamento">Nome do Cliente:</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block" onchange="this.form.submit()"
@@ -56,6 +57,7 @@
 														?>
 													</select>
 												</div>
+												-->
 												<div class="col-md-3 text-left">
 													<label for="ServicoConcluido">Prod. Entr.?</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
@@ -109,6 +111,7 @@
 														</div>
 													</div>
 												</div>
+												<!--
 												<div class="col-md-3 text-left">
 													<label for="Ordenamento">Forma de Pag.</label>
 													<select data-placeholder="Selecione uma opção..." class="form-control Chosen btn-block " onchange="this.form.submit()"
@@ -124,6 +127,7 @@
 														?>
 													</select>
 												</div>
+												-->
 											</div>	
 											<div class="row">																	
 												<div class="col-md-3 text-left">

@@ -7,82 +7,56 @@
 		<div class="col-md-2"></div>
 		<div class="col-md-8">
 		
-			<div class="panel panel-primary">
+
 				
-				<div class="panel-heading"><strong><?php echo '<strong>' . $_SESSION['Cliente']['NomeCliente'] . '</strong> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?></strong></div>
-				<div class="panel-body">
+
+
 			
-					<div class="form-group">
-						<div class="row">
-							<div class="col-md-2 "></div>
-							<div class="col-md-8 col-lg-8">
-								<div class="col-md-4 text-left">
-									<label for="">Cliente & Contatos:</label>
-									<div class="form-group">
-										<div class="row">	
-											<a <?php if (preg_match("/prontuario\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; //(.)+\/prontuario/   ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-file"> </span> Ver <span class="sr-only">(current)</span>
-												</a>
-											</a>				
-											<a <?php if (preg_match("/cliente\/alterar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ///(.)+\/alterar/    ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-edit"></span> Edit.
-												</a>
-											</a>
-										</div>
-									</div>	
-								</div>
-
-								<div class="col-md-4 text-center">
-									<label for="">Agendamentos:</label>
-									<div class="form-group">
-										<div class="row">
-											<a <?php if (preg_match("/consulta\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'consulta/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-calendar"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/consulta\/(cadastrar|alterar)\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'consulta/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>	
-									</div>	
-								</div>
-
-								<div class="col-md-4 text-right">
-									<label for="">Orçamentos:</label>
-									<div class="form-group ">
-										<div class="row">
-											<a <?php if (preg_match("/orcatrata\/listar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-success" href="<?php echo base_url() . 'orcatrata/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-usd"></span> List.
-												</a>
-											</a>
-											<a <?php if (preg_match("/orcatrata\/cadastrar\b/", $_SERVER['REQUEST_URI'])) echo 'class=active'; ?>>
-												<a class="btn btn-md btn-warning" href="<?php echo base_url() . 'orcatrata/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
-													<span class="glyphicon glyphicon-plus"></span> Cad.
-												</a>
-											</a>
-										</div>		
-									</div>	
-								</div>
-							</div>
-							<div class="col-md-2 "></div>
-						</div>	
-					</div>
-					<!--
-					<div class="form-group">		
-						<div class="row">
-							<div class="text-center t">
-								<h3><?php echo '<strong>' . $_SESSION['Cliente']['NomeCliente'] . '</strong> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?></h3>
-							</div>
+					<nav class="navbar navbar-inverse">
+					  <div class="container-fluid">
+						<div class="navbar-header">
+						  <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span>
+							<span class="icon-bar"></span> 
+						  </button>
+						  <a class="navbar-brand" href="<?php echo base_url() . 'cliente/prontuario/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+							<?php echo '<small>' . $_SESSION['Cliente']['NomeCliente'] . '</small> - <small>Id.: ' . $_SESSION['Cliente']['idApp_Cliente'] . '</small>' ?>
+						  </a>
 						</div>
-					</div>
-					-->
-						<?php } ?>
+						<div class="collapse navbar-collapse" id="myNavbar">
+
+							<ul class="nav navbar-nav navbar-center">
+								<li>
+									<a href="<?php echo base_url() . 'cliente/alterar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-edit"></span> Editar Cliente
+									</a>
+								</li>
+
+								<li>
+									<a href="<?php echo base_url() . 'orcatratacons/listar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-usd"></span> Ver Orçams.
+									</a>
+								</li>
+
+								<li>
+									<a href="<?php echo base_url() . 'orcatratacons/cadastrar/' . $_SESSION['Cliente']['idApp_Cliente']; ?>">
+										<span class="glyphicon glyphicon-plus"></span> Cad. Orçam.
+									</a>
+								</li>
+							</ul>
+							<!--
+							<ul class="nav navbar-nav navbar-right">
+								<li><a href="#"><span class="glyphicon glyphicon-user"></span> Sign Up</a></li>
+								<li><a href="#"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+							</ul>
+							-->
+						</div>
+					  </div>
+					</nav>
+
+					<?php } ?>
+					
 					<div class="row">
 					
 						<div class="col-md-12 col-lg-12">
@@ -250,7 +224,7 @@
 													<?php
 													if (!$list) {
 													?>
-														<a class="btn btn-lg btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button"> 
+														<a class="btn btn-md btn-warning" href="<?php echo base_url() ?>contatocliente/cadastrar" role="button"> 
 															<span class="glyphicon glyphicon-plus"></span> Cad.
 														</a>
 														<br><br>
@@ -270,8 +244,8 @@
 							</div>		
 						</div>
 					</div>									
-				</div>	
-			</div>
+
+
 
 		</div>
 		<div class="col-md-2"></div>
