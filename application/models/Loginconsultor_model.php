@@ -13,37 +13,6 @@ class Loginconsultor_model extends CI_Model {
 
     }
 
-    public function check_dados_usuario1($senha, $usuario, $retorna = FALSE) {
-
-        $query = $this->db->query('SELECT * FROM Sis_Usuario WHERE '
-                . '(Usuario = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '") OR '
-                . '(Email = "' . $usuario . '" AND '
-                . 'Senha = "' . $senha . '")'
-        );
-        #$query = $this->db->get_where('Sis_Usuario', $data);
-        /*
-          echo $this->db->last_query();
-          echo "<pre>";
-          print_r($query);
-          echo "</pre>";
-          exit();
-         */
-        if ($query->num_rows() === 0) {
-            return FALSE;
-        }
-        else {
-            if ($retorna === FALSE) {
-                return TRUE;
-            }
-            else {
-                $query = $query->result_array();
-                return $query[0];
-            }
-        }
-
-    }
-	
 	public function check_dados_usuario($senha, $usuario, $retorna = FALSE) {
 
         $query = $this->db->query('SELECT * FROM App_Consultor WHERE '
@@ -92,16 +61,23 @@ class Loginconsultor_model extends CI_Model {
 				return 2;
 			}
 			else   
-				if ($query[0]['Nivel'] != 3) {
-					if ($query[0]['Nivel'] != 4) {
-					return 3;
-					}
-				}											
-				else 
-				return FALSE;			
+				if ($query[0]['Empresa'] != 3) {
+					return 4;
+				}			
+				else   
+					if ($query[0]['Nivel'] != 3) {
+						if ($query[0]['Nivel'] != 4) {
+						return 3;
+						}
+					}											
+
+					else 
+					return FALSE;			
         }
 
-        #$query = $this->db->get_where('App_Consultor', $data);
+        /* !!!!  Ainda não sei porque, mas se o nível do consultor for 4, ele consegue furar a barreira da empresa!!!!!*/
+		
+		#$query = $this->db->get_where('App_Consultor', $data);
         /*
           echo $this->db->last_query();
           echo "<pre>";

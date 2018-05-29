@@ -36,7 +36,7 @@ class Logincliente extends CI_Controller {
     public function index() {
 
         #$_SESSION['log']['cliente'] = $_SESSION['log']['nome_modulo'] =
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         ###################################################
@@ -109,9 +109,9 @@ class Logincliente extends CI_Controller {
                 #$_SESSION['log']['Usuario'] = $query['Usuario'];
                 //se for necessário reduzir o tamanho do nome de usuário, que pode ser um email
 				$_SESSION['log']['Usuario'] = (strlen($query['Usuario']) > 15) ? substr($query['Usuario'], 0, 15) : $query['Usuario'];
-                $_SESSION['log']['Nome2'] = (strlen($query['Nome']) > 10) ? substr($query['Nome'], 0, 10) : $query['Nome'];
-				$_SESSION['log']['Nome'] = $query['Nome'];
-				$_SESSION['log']['id'] = $query['idSis_Usuario'];
+                $_SESSION['log']['Nome2'] = (strlen($query['NomeCliente']) > 10) ? substr($query['NomeCliente'], 0, 10) : $query['NomeCliente'];
+				$_SESSION['log']['NomeCliente'] = $query['NomeCliente'];
+				$_SESSION['log']['id'] = $query['idApp_Cliente'];
 				$_SESSION['log']['idSis_EmpresaFilial'] = $query['idSis_EmpresaFilial'];
 				$_SESSION['log']['idSis_EmpresaMatriz'] = $query['idSis_EmpresaMatriz'];
 				$_SESSION['log']['Empresa'] = $query['Empresa'];
@@ -148,7 +148,7 @@ class Logincliente extends CI_Controller {
 
     public function registrar() {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)
@@ -298,7 +298,7 @@ class Logincliente extends CI_Controller {
 
     public function confirmar($codigo) {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         $data['anterior'] = array(
@@ -329,7 +329,7 @@ class Logincliente extends CI_Controller {
 
     public function recuperar() {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)
@@ -409,7 +409,7 @@ class Logincliente extends CI_Controller {
 
     public function trocar_senha($codigo = NULL) {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)

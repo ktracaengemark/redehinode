@@ -36,7 +36,7 @@ class Loginempresafilial extends CI_Controller {
     public function index() {
 
         #$_SESSION['log']['cliente'] = $_SESSION['log']['nome_modulo'] =
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         ###################################################
@@ -146,7 +146,7 @@ class Loginempresafilial extends CI_Controller {
 
     public function registrar() {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)
@@ -267,7 +267,7 @@ class Loginempresafilial extends CI_Controller {
 
     public function confirmar($codigo) {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
 
@@ -299,7 +299,7 @@ class Loginempresafilial extends CI_Controller {
 
     public function recuperar() {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)
@@ -379,7 +379,7 @@ class Loginempresafilial extends CI_Controller {
 
     public function trocar_senha($codigo = NULL) {
 
-        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'varejo';
+        $_SESSION['log']['nome_modulo'] = $_SESSION['log']['modulo'] = $data['modulo'] = $data['nome_modulo'] = 'hinode';
         $_SESSION['log']['idTab_Modulo'] = 1;
 
         if ($this->input->get('m') == 1)

@@ -120,9 +120,8 @@
 						</li>
 						<li class="btn-toolbar navbar-form navbar-right" role="toolbar" aria-label="...">
 						
-							<div class="btn-group" role="group" aria-label="...">
-								<!--<a href="<?php echo base_url() ?>relatorioconsultor/sistema">-->
-								<a >
+							<div class="btn-group" role="group" aria-label="...">								
+								<a href="<?php echo base_url() ?>relatorioconsultor/sistema">
 									<button type="button" class="btn btn-md " id="countdowndiv">
 										<span class="glyphicon glyphicon-hourglass" id="clock"></span>
 									</button>
