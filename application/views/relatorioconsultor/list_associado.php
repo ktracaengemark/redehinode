@@ -15,11 +15,11 @@
                         <!--<th class="active">Associador</th>
 						<th class="active">Nº do Associado</th>-->
                         <th class="active">Associado</th>
-                        <th class="active">Sexo</th>					
+                        <!--<th class="active">Sexo</th>-->					
                         <th class="active">Telefone</th>
-						<th class="active">Nascimento</th>
+						<!--<th class="active">Nascimento</th>
                         <th class="active">E-mail</th>
-						<th class="active">Usuário</th>
+						<th class="active">Usuário</th>-->
 						<th class="active">Ativo?</th>
 						
                     </tr>
@@ -35,11 +35,11 @@
                             #echo '<td>' . $row['Associado'] . '</td>';
 							#echo '<td>' . $row['idSis_Usuario'] . '</td>';
                             echo '<td>' . $row['NomeConsultor'] . '</td>';
-                            echo '<td>' . $row['Sexo'] . '</td>';							
+                            #echo '<td>' . $row['Sexo'] . '</td>';							
                             echo '<td>' . $row['Celular'] . '</td>';
-							echo '<td>' . $row['DataNascimento'] . '</td>';
-                            echo '<td>' . $row['Email'] . '</td>';
-							echo '<td>' . $row['Usuario'] . '</td>';
+							#echo '<td>' . $row['DataNascimento'] . '</td>';
+                           # echo '<td>' . $row['Email'] . '</td>';
+							#echo '<td>' . $row['Usuario'] . '</td>';
 							echo '<td>' . $row['StatusSN'] . '</td>';
 							#echo '<td>' . $row['Inativo'] . '</td>';
                         echo '</tr>';
